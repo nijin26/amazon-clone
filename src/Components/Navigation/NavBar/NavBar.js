@@ -5,7 +5,11 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 import classes from "./NavBar.module.css";
 
+import { useStateValue } from "../../../store/StateProvider";
+
 const NavBar = () => {
+  const [{ basket }] = useStateValue();
+
   return (
     <nav className={classes.navbar}>
       <Link to="/">
@@ -44,7 +48,7 @@ const NavBar = () => {
         <Link to="/checkout" className={classes.link}>
           <div className={classes.optionBasket}>
             <ShoppingBasketIcon />
-            <span className={classes.basketCount}>0</span>
+            <span className={classes.basketCount}> {basket?.length} </span>
           </div>
         </Link>
       </div>

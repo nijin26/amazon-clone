@@ -2,7 +2,18 @@ import React from "react";
 
 import "./Product.css";
 
+import { useStateValue } from "../../store/StateProvider";
+
 const Product = ({ id, title, price, rating, image }) => {
+  const [_, dispatch] = useStateValue();
+
+  const addToBasket = () => {
+    dispatch({
+      type: "ADD_TO_BASKET",
+      item: { id, title, price, rating, image },
+    });
+  };
+
   return (
     <div className="product">
       <div className="product__info">
@@ -16,13 +27,13 @@ const Product = ({ id, title, price, rating, image }) => {
           {Array(rating)
             .fill()
             .map((_) => (
-              <p>⭐</p>
+              <p key={Math.random()}>⭐</p>
             ))}
         </div>
       </div>
 
       <img src={image} alt={`${title} image`} />
-      <button> Add to Cart </button>
+      <button onClick={addToBasket}> Add to Cart </button>
     </div>
   );
 };
