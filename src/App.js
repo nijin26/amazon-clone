@@ -5,6 +5,7 @@ import "./App.css";
 
 import NavBar from "./Components/Navigation/NavBar/NavBar";
 import Home from "./Components/Home/Home";
+import Checkout from "./Components/Checkout/Checkout";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Switch>
         <Route path="/checkout">
           <NavBar />
+          <Checkout />
         </Route>
         <Route path="/login"></Route>
         <Route path="/">
