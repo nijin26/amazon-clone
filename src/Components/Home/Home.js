@@ -7,7 +7,11 @@ import Product from "../Product/Product";
 const Home = () => {
   return (
     <div className="Home">
-      <img src="https://i.imgur.com/SqUrAFJ.jpg" className="Home__image" />
+      <img
+        src="https://i.imgur.com/SqUrAFJ.jpg"
+        className="Home__image"
+        alt=""
+      />
 
       <div className="home__row">
         <Product

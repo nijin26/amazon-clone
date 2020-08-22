@@ -1,15 +1,6 @@
 export const initialState = {
-  basket: [
-    {
-      id: "123456",
-      title:
-        "Echo Dot (3rd Gen) – New and improved smart speaker with Alexa (Black)",
-      price: {3499},
-      rating: 4,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/61%2BQNG8IiPL._SL1000_.jpg",
-    },
-  ],
+  basket: [],
+  user: null,
 };
 
 export const getBasketTotal = (basket) =>
@@ -19,6 +10,12 @@ export const reducer = (state, action) => {
   console.log(action);
 
   switch (action.type) {
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user,
+      };
+
     case "ADD_TO_BASKET":
       return {
         ...state,
@@ -36,11 +33,11 @@ export const reducer = (state, action) => {
           `Cant remove product (id: ${action.id} ) as its not present`
         );
       }
-
       return {
         ...state,
         basket: newBasket,
       };
+
     default:
       return state;
   }

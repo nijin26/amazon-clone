@@ -6,9 +6,16 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import classes from "./NavBar.module.css";
 
 import { useStateValue } from "../../../store/StateProvider";
+import { auth } from "../../Auth/firebase";
 
 const NavBar = () => {
-  const [{ basket }] = useStateValue();
+  const [{ basket, user }] = useStateValue();
+
+  const logout = () => {
+    if (user) {
+      auth.signOut();
+    }
+  };
 
   return (
     <nav className={classes.navbar}>
@@ -16,6 +23,7 @@ const NavBar = () => {
         <img
           src="https://i.imgur.com/brElRal.png"
           className={classes.navbar__logo}
+          alt=""
         />
       </Link>
       <div className={classes.searchArea}>
@@ -24,10 +32,15 @@ const NavBar = () => {
       </div>
 
       <div className={classes.navLinks}>
-        <Link to="/login" className={classes.link}>
-          <div className={classes.option}>
-            <span className={classes.optionOne}>Hello Nijin</span>
-            <span className={classes.optionTwo}>Sign In</span>
+        <Link to={!user && "/login"} className={classes.link}>
+          <div onClick={logout} className={classes.option}>
+            <span className={classes.optionOne}>
+              {" "}
+              {`Hello ${user ? user.email : ""}`}{" "}
+            </span>
+            <span className={classes.optionTwo}>
+              {!user ? "Sign In" : "Sign Out"}
+            </span>
           </div>
         </Link>
 
@@ -38,7 +51,7 @@ const NavBar = () => {
           </div>
         </Link>
 
-        <Link to="/" className={classes.link}>
+        <Link to="/login" className={classes.link}>
           <div className={classes.option}>
             <span className={classes.optionOne}>Your</span>
             <span className={classes.optionTwo}>Prime</span>
