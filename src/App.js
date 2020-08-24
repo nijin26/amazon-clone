@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -11,7 +11,7 @@ import { useStateValue } from "./store/StateProvider";
 import { auth } from "./Components/Auth/firebase";
 
 const App = () => {
-  const [{ user }, dispatch] = useStateValue();
+  const [_, dispatch] = useStateValue();
 
   useEffect(() => {
     const unsubcribe = auth.onAuthStateChanged((authUser) => {
